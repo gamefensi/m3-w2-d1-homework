@@ -89,14 +89,17 @@ MongoClient.connect(url, {
     //     if (err) throw err;
     //     console.log(result.zip);
     //     db.close();
-    // })
-    // var myquery = { state: /^CA/ };
+    // });
+    var myquery = { state: "CA" };
 
-    // dbo.collection("uscensus").find(myquery, {income: 0}).toArray(function (err, result) {
-    //     if (err) throw err;
-    //     console.log(result);
-    //     db.close()
-    // })
+    dbo.collection("uscensus").find(myquery).toArray(function (err, result) {
+        if (err) throw err;
+        for (var i=0; i<result.length; i++) {
+            console.log(result[i].city + " income: " + result[i].income);
+        }
+        db.close();
+    })
+
     // var myquery = { state: "AK" };
     // var newValues = { $set: {income: "38910", age: "46" } };
     // dbo.collection("uscensus").updateOne(myquery, newValues, function(err, res) {
@@ -104,11 +107,11 @@ MongoClient.connect(url, {
     //     console.log("1 document updated");
     //     db.close();
     // })
-    var mysort = {state: 1};
-    dbo.collection("uscensus").find().sort(mysort).toArray(function(err, result) {
-        if (err) throw err;
-        console.log("List Sorted A-Z by State")
-        console.log(result);
-        db.close();
-    })
+    // var mysort = {state: 1};
+    // dbo.collection("uscensus").find().sort(mysort).toArray(function(err, result) {
+    //     if (err) throw err;
+    //     console.log("List Sorted A-Z by State")
+    //     console.log(result);
+    //     db.close();
+    // });
 });
